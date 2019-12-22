@@ -15,6 +15,7 @@ export class AppComponent implements AfterViewInit {
   eyePinDistance = 100;
   apertureDiameter = 10;
   apertureRingThickness = 1;
+  apertureColour = 'chartreuse';
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
@@ -83,7 +84,7 @@ export class AppComponent implements AfterViewInit {
     this.context.beginPath();
     this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureOuterRatio, 0, 2 * Math.PI, false);
     this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureInnerRatio, 0, 2 * Math.PI, true);
-    this.context.fillStyle = 'chartreuse'; // TODO make configurable
+    this.context.fillStyle = this.apertureColour;
     this.context.fill();
   }
 
