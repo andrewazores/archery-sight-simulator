@@ -8,30 +8,37 @@
     <div class="col-xs-12 col-lg-5">
       <div class="form-group">
         <label for="targetDistance">Target Distance</label>
-        <input id="targetDistance" class="form-control" type="number" min="1" max="200" value="70" [(ngModel)]="targetDistance">
+        <input id="targetDistance" class="form-control" type="number" min="1" max="200" [(ngModel)]="targetDistance">
         <small class="form-text text-muted">
           Distance from the shooting line to the target face in meters.
         </small>
       </div>
       <div class="form-group">
         <label for="targetDiameter">Target Diameter</label>
-        <input id="targetDiameter" class="form-control" type="number" min="1" max="122" value="122" [(ngModel)]="targetDiameter">
+        <input id="targetDiameter" class="form-control" type="number" min="1" max="122" [(ngModel)]="targetDiameter">
         <small class="form-text text-muted">
           Target face diameter in centimeters.
         </small>
       </div>
       <div class="form-group">
         <label for="eyePinDistance">Eye to Pin Distance</label>
-        <input id="eyePinDistance" class="form-control" type="number" min="1" max="200" value="100" [(ngModel)]="eyePinDistance">
+        <input id="eyePinDistance" class="form-control" type="number" min="1" max="200" [(ngModel)]="eyePinDistance">
         <small class="form-text text-muted">
           Distance from archer's (aiming) eye to the sight pin/aperture in centimeters.
         </small>
       </div>
       <div class="form-group">
-        <label for="apertureInnerDiameter">Aperture Inner Diamater</label>
-        <input id="apertureInnerDiameter" class="form-control" type="number" min="1" max="50" value="10" [(ngModel)]="apertureDiameter">
+        <label for="apertureInnerDiameter">Aperture Inner Diameter</label>
+        <input id="apertureInnerDiameter" class="form-control" type="number" min="1" max="50" [(ngModel)]="apertureDiameter">
         <small class="form-text text-muted">
           Inner diameter of the sight aperture in millimeters.
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="apertureRingThickness">Aperture Ring Thickness</label>
+        <input id="apertureRingThickness" class="form-control" type="number" min="1" max="5" [(ngModel)]="apertureRingThickness">
+        <small class="form-text text-muted">
+          Thickness of aperture ring in millimeters.
         </small>
       </div>
       <div class="form-group">

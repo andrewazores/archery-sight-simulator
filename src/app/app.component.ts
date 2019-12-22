@@ -14,6 +14,7 @@ export class AppComponent implements AfterViewInit {
   targetDiameter = 122;
   eyePinDistance = 100;
   apertureDiameter = 10;
+  apertureRingThickness = 1;
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
@@ -68,19 +69,22 @@ export class AppComponent implements AfterViewInit {
     const targetDistance = this.targetDistance * 100;
     const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance)) * 180 / Math.PI;
 
-    const apertureDiameter = this.apertureDiameter / 10;
-    const apertureAngleDeg = 2 * Math.atan(apertureDiameter/(2*this.eyePinDistance)) * 180 / Math.PI;
+    const apertureOuterDiameter = this.apertureDiameter / 10 + (this.apertureRingThickness / 10);
+    const apertureOuterAngleDeg = 2 * Math.atan(apertureOuterDiameter/(2*this.eyePinDistance)) * 180 / Math.PI;
 
-    const apertureRatio = apertureAngleDeg / targetAngleDeg;
+    const apertureInnerDiameter = this.apertureDiameter / 10;
+    const apertureInnerAngleDeg = 2 * Math.atan(apertureInnerDiameter/(2*this.eyePinDistance)) * 180 / Math.PI;
 
-    console.log({ targetAngleDeg, apertureAngleDeg });
+    const apertureOuterRatio = apertureOuterAngleDeg / targetAngleDeg;
+    const apertureInnerRatio = apertureInnerAngleDeg / targetAngleDeg;
+
+    console.log({ targetAngleDeg, apertureInnerAngleDeg });
 
     this.context.beginPath();
-    this.context.lineWidth = 12; // TODO make configurable
-    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureRatio + this.context.lineWidth, 0, 2 * Math.PI);
-    this.context.strokeStyle = 'chartreuse'; // TODO make configurable
-    this.context.stroke();
-    this.context.closePath()
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureOuterRatio, 0, 2 * Math.PI, false);
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureInnerRatio, 0, 2 * Math.PI, true);
+    this.context.fillStyle = 'chartreuse'; // TODO make configurable
+    this.context.fill();
   }
 
   drawConcentricRing(idx: number, color: string, divider: boolean = false): void {
@@ -92,12 +96,12 @@ export class AppComponent implements AfterViewInit {
     this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, radius, 0, 2 * Math.PI);
     if (divider) {
       this.context.strokeStyle = color;
+      this.context.closePath()
       this.context.stroke();
     } else {
       this.context.fillStyle = color;
       this.context.fill();
     }
-    this.context.closePath()
   }
 
   clearCanvas(): void {
