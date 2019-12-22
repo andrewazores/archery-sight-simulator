@@ -29,6 +29,7 @@ export class AppComponent implements AfterViewInit {
       apertureDiameter: this.apertureDiameter,
     });
     this.drawTarget();
+    this.drawAperture();
   }
 
   drawTarget(): void {
@@ -62,14 +63,33 @@ export class AppComponent implements AfterViewInit {
     this.drawConcentricRing(9, gold, false);
   }
 
+  drawAperture(): void {
+    // work in cm
+    const targetDistance = this.targetDistance * 100;
+    const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance)) * 180 / Math.PI;
+
+    const apertureDiameter = this.apertureDiameter / 10;
+    const apertureAngleDeg = 2 * Math.atan(apertureDiameter/(2*this.eyePinDistance)) * 180 / Math.PI;
+
+    const apertureRatio = apertureAngleDeg / targetAngleDeg;
+
+    console.log({ targetAngleDeg, apertureAngleDeg });
+
+    this.context.beginPath();
+    this.context.lineWidth = 12; // TODO make configurable
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureRatio + this.context.lineWidth, 0, 2 * Math.PI);
+    this.context.strokeStyle = 'chartreuse'; // TODO make configurable
+    this.context.stroke();
+    this.context.closePath()
+  }
+
   drawConcentricRing(idx: number, color: string, divider: boolean = false): void {
-    const canvasWidth = this.canvas.nativeElement.width;
-    const canvasHeight = this.canvas.nativeElement.height;
-    const maxRadius = Math.min(canvasWidth, canvasHeight)/2;
+    const maxRadius = this.getTargetRadius();
     const radius = maxRadius - ((maxRadius/10) * idx);
 
     this.context.beginPath();
-    this.context.arc(canvasWidth/2, canvasHeight/2, radius, 0, 2 * Math.PI);
+    this.context.lineWidth = 1;
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, radius, 0, 2 * Math.PI);
     if (divider) {
       this.context.strokeStyle = color;
       this.context.stroke();
@@ -77,6 +97,7 @@ export class AppComponent implements AfterViewInit {
       this.context.fillStyle = color;
       this.context.fill();
     }
+    this.context.closePath()
   }
 
   clearCanvas(): void {
@@ -85,4 +106,25 @@ export class AppComponent implements AfterViewInit {
     this.context.clearRect(0, 0, canvasWidth, canvasHeight);
   }
 
+  private getTargetRadius(): number {
+    const canvasWidth = this.canvas.nativeElement.width;
+    const canvasHeight = this.canvas.nativeElement.height;
+    const maxRadius = Math.min(canvasWidth, canvasHeight)/2;
+    return maxRadius;
+  }
+
+  private getCanvcasCenter(): Pair<number, number> {
+    const canvasWidth = this.canvas.nativeElement.width;
+    const canvasHeight = this.canvas.nativeElement.height;
+    return {
+      first: canvasWidth/2,
+      second: canvasHeight/2,
+    };
+  }
+
+}
+
+interface Pair<T, R> {
+  first: T;
+  second: R;
 }
