@@ -68,22 +68,25 @@ export class AppComponent implements AfterViewInit {
   drawAperture(): void {
     // work in cm
     const targetDistance = this.targetDistance * 100;
-    const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance)) * 180 / Math.PI;
+    const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance));
 
     const apertureOuterDiameter = this.apertureDiameter / 10 + (this.apertureRingThickness / 10);
-    const apertureOuterAngleDeg = 2 * Math.atan(apertureOuterDiameter/(2*this.eyePinDistance)) * 180 / Math.PI;
+    const apertureOuterAngle = 2 * Math.atan(apertureOuterDiameter/(2*this.eyePinDistance));
 
     const apertureInnerDiameter = this.apertureDiameter / 10;
-    const apertureInnerAngleDeg = 2 * Math.atan(apertureInnerDiameter/(2*this.eyePinDistance)) * 180 / Math.PI;
+    const apertureInnerAngle = 2 * Math.atan(apertureInnerDiameter/(2*this.eyePinDistance));
 
-    const apertureOuterRatio = apertureOuterAngleDeg / targetAngleDeg;
-    const apertureInnerRatio = apertureInnerAngleDeg / targetAngleDeg;
+    const apertureOuterApparent = Math.abs(2*targetDistance*Math.tan(apertureOuterAngle/2));
+    const apertureInnerApparent = Math.abs(2*targetDistance*Math.tan(apertureInnerAngle/2));
 
-    console.log({ targetAngleDeg, apertureInnerAngleDeg });
+    const apertureOuterCanvasScaled = (apertureOuterApparent / this.targetDiameter) * this.getTargetRadius();
+    const apertureInnerCanvasScaled = (apertureInnerApparent / this.targetDiameter) * this.getTargetRadius();
+
+    console.log({ targetAngleDeg, apertureInnerAngle });
 
     this.context.beginPath();
-    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureOuterRatio, 0, 2 * Math.PI, false);
-    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, this.getTargetRadius() * apertureInnerRatio, 0, 2 * Math.PI, true);
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, apertureOuterCanvasScaled, 0, 2 * Math.PI, false);
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, apertureInnerCanvasScaled, 0, 2 * Math.PI, true);
     this.context.fillStyle = this.apertureColour;
     this.context.fill();
   }
