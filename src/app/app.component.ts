@@ -16,6 +16,9 @@ export class AppComponent implements AfterViewInit {
   apertureDiameter = 10;
   apertureRingThickness = 1;
   apertureColour = 'chartreuse';
+  reticleType = '';
+  reticleSize = 1;
+  reticleColour = 'black';
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
@@ -88,6 +91,26 @@ export class AppComponent implements AfterViewInit {
     this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, apertureOuterCanvasScaled, 0, 2 * Math.PI, false);
     this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, apertureInnerCanvasScaled, 0, 2 * Math.PI, true);
     this.context.fillStyle = this.apertureColour;
+    this.context.fill();
+
+    this.drawReticle();
+  }
+
+  drawReticle(): void {
+    if (!this.reticleType) {
+      return;
+    }
+    const targetDistance = this.targetDistance * 100;
+    const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance));
+
+    const reticleSize = this.reticleSize / 10;
+    const reticleAngle = 2 * Math.atan(reticleSize/(2*this.eyePinDistance));
+    const reticleApparent = Math.abs(2*targetDistance*Math.tan(reticleAngle/2));
+    const reticleCanvasScaled = (reticleApparent / this.targetDiameter) * this.getTargetRadius();
+
+    this.context.beginPath();
+    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, reticleCanvasScaled, 0, 2 * Math.PI, false);
+    this.context.fillStyle = this.reticleColour;
     this.context.fill();
   }
 
