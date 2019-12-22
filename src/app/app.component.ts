@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'archery-sight-simulator';
+
+  targetDistance = 70;
+  targetDiameter = 122;
+  eyePinDistance = 100;
+  apertureDiameter = 10;
+
 }
