@@ -35,6 +35,7 @@ export class AppComponent implements AfterViewInit {
     });
     this.drawTarget();
     this.drawAperture();
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   drawTarget(): void {
