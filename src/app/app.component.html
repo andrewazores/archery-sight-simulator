@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="form-group row">
-        <div class="col-xs-12 col-lg-4">
+        <div class="col-xs-12">
           <label for="reticleType">Reticle Type</label>
           <p>
             <select [(ngModel)]="reticleType">
@@ -75,30 +75,32 @@
             </select>
           </p>
         </div>
-        <div class="col-xs-12 col-lg-4" *ngIf="!!reticleType">
-          <label for="reticleSize">Reticle Size</label>
-          <input id="reticleSize" class="form-control" type="number" min="0.1" max="5" step="0.1" [(ngModel)]="reticleSize">
-          <small class="form-text text-muted">
-            Diameter of aiming reticle in millimeters.
-          </small>
-        </div>
-        <div class="col-xs-12 col-lg-4" *ngIf="!!reticleType">
-          <label for="reticleColour">Reticle Colour</label>
-          <p>
-            <select id="reticleColour" [(ngModel)]="reticleColour">
-              <option value="chartreuse">Flo. Green</option>
-              <option value="crimson">Dark Red</option>
-              <option value="red">Bright Red</option>
-              <option value="darkorange">Orange</option>
-              <option value="gold">Yellow</option>
-              <option value="cornflowerblue">Blue</option>
-              <option value="black">Black</option>
-              <option value="grey">Grey</option>
-            </select>
-          </p>
-          <small class="form-text text-muted">
-            Colour of aiming reticle.
-          </small>
+        <div class="row" *ngIf="!!reticleType">
+          <div class="col-xs-12 col-lg-6" *ngIf="!!reticleType">
+            <label for="reticleSize">Reticle Size</label>
+            <input id="reticleSize" class="form-control" type="number" min="0.1" max="5" step="0.1" [(ngModel)]="reticleSize">
+            <small class="form-text text-muted">
+              Diameter of aiming reticle in millimeters.
+            </small>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <label for="reticleColour">Reticle Colour</label>
+            <p>
+              <select id="reticleColour" [(ngModel)]="reticleColour">
+                <option value="chartreuse">Flo. Green</option>
+                <option value="crimson">Dark Red</option>
+                <option value="red">Bright Red</option>
+                <option value="darkorange">Orange</option>
+                <option value="gold">Yellow</option>
+                <option value="cornflowerblue">Blue</option>
+                <option value="black">Black</option>
+                <option value="grey">Grey</option>
+              </select>
+            </p>
+            <small class="form-text text-muted">
+              Colour of aiming reticle.
+            </small>
+          </div>
         </div>
       </div>
       <div class="form-group">
