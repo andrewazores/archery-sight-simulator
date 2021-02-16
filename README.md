@@ -12,7 +12,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build --prod --base-href="https://andrewazores.github.io/archery-sight-simulator/"` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Deploy
+
+Run `npx angular-cli-ghpages --dir dist/archery-sight-simulator` after a build.
 
 ## Running unit tests
 
