@@ -309,7 +309,7 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("canvas {\n  background-color: ghostwhite;\n  border: 1px solid grey;\n  width: 100%;\n  height: auto;\n}\n.row {\n  padding: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2FuZHJldy93b3Jrc3BhY2UvYXJjaGVyeS1zaWdodC1zaW11bGF0b3Ivc3JjL2FwcC9hcHAuY29tcG9uZW50Lmxlc3MiLCJzcmMvYXBwL2FwcC5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDRCQUFBO0VBQ0Esc0JBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtBQ0NGO0FERUE7RUFDRSxhQUFBO0FDQUYiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyJjYW52YXMge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBnaG9zdHdoaXRlO1xuICBib3JkZXI6IDFweCBzb2xpZCBncmV5O1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiBhdXRvO1xufVxuXG4ucm93IHtcbiAgcGFkZGluZzogMTBweDtcbn1cbiIsImNhbnZhcyB7XG4gIGJhY2tncm91bmQtY29sb3I6IGdob3N0d2hpdGU7XG4gIGJvcmRlcjogMXB4IHNvbGlkIGdyZXk7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IGF1dG87XG59XG4ucm93IHtcbiAgcGFkZGluZzogMTBweDtcbn1cbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("canvas {\n  background-color: ghostwhite;\n  border: 1px solid grey;\n  width: 100%;\n  height: auto;\n}\n.row {\n  padding: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2Fhem9yZXMvd29ya3NwYWNlL2FyY2hlcnktc2lnaHQtc2ltdWxhdG9yL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5sZXNzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSw0QkFBQTtFQUNBLHNCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNDRjtBREVBO0VBQ0UsYUFBQTtBQ0FGIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiY2FudmFzIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogZ2hvc3R3aGl0ZTtcbiAgYm9yZGVyOiAxcHggc29saWQgZ3JleTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogYXV0bztcbn1cblxuLnJvdyB7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG4iLCJjYW52YXMge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBnaG9zdHdoaXRlO1xuICBib3JkZXI6IDFweCBzb2xpZCBncmV5O1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiBhdXRvO1xufVxuLnJvdyB7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG4iXX0= */");
 
 /***/ }),
 
@@ -575,7 +575,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/andrew/workspace/archery-sight-simulator/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/aazores/workspace/archery-sight-simulator/src/main.ts */"./src/main.ts");
 
 
 /***/ })

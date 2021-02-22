@@ -23,7 +23,7 @@
 
   /***/
   function node_modulesAngularDevkitBuildAngularSrcAngularCliFilesPluginsRawCssLoaderJsNode_modulesPostcssLoaderSrcIndexJsNode_modulesLessLoaderDistCjsJsSrcStylesLess(module, exports) {
-    module.exports = [[module.i, "/* You can add global styles to this file, and also import other style files */\n.app-title {\n  text-align: center;\n}\nfooter {\n  padding: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMubGVzcyIsIi9ob21lL2FuZHJldy93b3Jrc3BhY2UvYXJjaGVyeS1zaWdodC1zaW11bGF0b3Ivc3JjL3N0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDhFQUE4RTtBQ0U5RTtFQUNFLGtCQUFBO0FEQUY7QUNHQTtFQUNFLGFBQUE7QURERiIsImZpbGUiOiJzcmMvc3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBZb3UgY2FuIGFkZCBnbG9iYWwgc3R5bGVzIHRvIHRoaXMgZmlsZSwgYW5kIGFsc28gaW1wb3J0IG90aGVyIHN0eWxlIGZpbGVzICovXG4uYXBwLXRpdGxlIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuZm9vdGVyIHtcbiAgcGFkZGluZzogMTBweDtcbn1cbiIsIi8qIFlvdSBjYW4gYWRkIGdsb2JhbCBzdHlsZXMgdG8gdGhpcyBmaWxlLCBhbmQgYWxzbyBpbXBvcnQgb3RoZXIgc3R5bGUgZmlsZXMgKi9cblxuLmFwcC10aXRsZSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuZm9vdGVyIHtcbiAgcGFkZGluZzogMTBweDtcbn1cbiJdfQ== */", '', '']];
+    module.exports = [[module.i, "/* You can add global styles to this file, and also import other style files */\n.app-title {\n  text-align: center;\n}\nfooter {\n  padding: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMubGVzcyIsIi9ob21lL2Fhem9yZXMvd29ya3NwYWNlL2FyY2hlcnktc2lnaHQtc2ltdWxhdG9yL3NyYy9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw4RUFBOEU7QUNFOUU7RUFDRSxrQkFBQTtBREFGO0FDR0E7RUFDRSxhQUFBO0FEREYiLCJmaWxlIjoic3JjL3N0eWxlcy5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLyogWW91IGNhbiBhZGQgZ2xvYmFsIHN0eWxlcyB0byB0aGlzIGZpbGUsIGFuZCBhbHNvIGltcG9ydCBvdGhlciBzdHlsZSBmaWxlcyAqL1xuLmFwcC10aXRsZSB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbmZvb3RlciB7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG4iLCIvKiBZb3UgY2FuIGFkZCBnbG9iYWwgc3R5bGVzIHRvIHRoaXMgZmlsZSwgYW5kIGFsc28gaW1wb3J0IG90aGVyIHN0eWxlIGZpbGVzICovXG5cbi5hcHAtdGl0bGUge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbmZvb3RlciB7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG4iXX0= */", '', '']];
     /***/
   },
 
@@ -400,11 +400,11 @@
   /***/
   function _(module, exports, __webpack_require__) {
     __webpack_require__(
-    /*! /home/andrew/workspace/archery-sight-simulator/src/styles.less */
+    /*! /home/aazores/workspace/archery-sight-simulator/src/styles.less */
     "./src/styles.less");
 
     module.exports = __webpack_require__(
-    /*! /home/andrew/workspace/archery-sight-simulator/node_modules/bootstrap/dist/css/bootstrap.css */
+    /*! /home/aazores/workspace/archery-sight-simulator/node_modules/bootstrap/dist/css/bootstrap.css */
     "./node_modules/bootstrap/dist/css/bootstrap.css");
     /***/
   }
