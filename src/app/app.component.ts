@@ -30,9 +30,14 @@ export class AppComponent implements AfterViewInit {
   reticleColour = 'black';
   targetMoa = 0;
   apertureMoa = 0;
+  aimPoint: Pair<number, number> = { first: 0, second: 0 };
+  canvasDimensions: Pair<number, number> = { first: 0, second: 0};
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
+    const rect = this.context.canvas.getBoundingClientRect();
+    this.canvasDimensions = { first: rect.width, second: rect.height };
+    this.resetAimpoint();
     this.calculate();
   }
 
@@ -51,6 +56,11 @@ export class AppComponent implements AfterViewInit {
 
     this.targetMoa = (21600 / Math.PI) * Math.atan(this.targetDiameter / (2*targetDistance));
     this.apertureMoa = (21600 / Math.PI) * Math.atan((this.apertureDiameter / 10) / (2*this.eyePinDistance));
+  }
+
+  resetAimpoint(): void {
+    this.aimPoint = this.getCanvcasCenter();
+    this.calculate();
   }
 
   drawTarget(): void {
@@ -144,7 +154,6 @@ export class AppComponent implements AfterViewInit {
   drawAperture(): void {
     // work in cm
     const targetDistance = this.targetDistance * 100;
-    const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance));
 
     const apertureOuterDiameter = this.apertureDiameter / 10 + (this.apertureRingThickness / 10);
     const apertureOuterAngle = 2 * Math.atan(apertureOuterDiameter/(2*this.eyePinDistance));
@@ -158,11 +167,9 @@ export class AppComponent implements AfterViewInit {
     const apertureOuterCanvasScaled = (apertureOuterApparent / this.targetDiameter) * this.getTargetRadius();
     const apertureInnerCanvasScaled = (apertureInnerApparent / this.targetDiameter) * this.getTargetRadius();
 
-    console.log({ targetAngleDeg, apertureInnerAngle });
-
     this.context.beginPath();
-    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, apertureOuterCanvasScaled, 0, 2 * Math.PI, false);
-    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, apertureInnerCanvasScaled, 0, 2 * Math.PI, true);
+    this.context.arc(this.aimPoint.first, this.aimPoint.second, apertureOuterCanvasScaled, 0, 2 * Math.PI, false);
+    this.context.arc(this.aimPoint.first, this.aimPoint.second, apertureInnerCanvasScaled, 0, 2 * Math.PI, true);
     this.context.fillStyle = this.apertureColour;
     this.context.fill();
 
@@ -181,7 +188,7 @@ export class AppComponent implements AfterViewInit {
     const reticleCanvasScaled = (reticleApparent / this.targetDiameter) * this.getTargetRadius();
 
     this.context.beginPath();
-    this.context.arc(this.getCanvcasCenter().first, this.getCanvcasCenter().second, reticleCanvasScaled, 0, 2 * Math.PI, false);
+    this.context.arc(this.aimPoint.first, this.aimPoint.second, reticleCanvasScaled, 0, 2 * Math.PI, false);
     this.context.fillStyle = this.reticleColour;
     this.context.fill();
   }
@@ -209,6 +216,21 @@ export class AppComponent implements AfterViewInit {
     this.context.clearRect(0, 0, canvasWidth, canvasHeight);
   }
 
+  handleCanvasClick(event: any): void {
+    const rect = this.context.canvas.getBoundingClientRect();
+    const scaleX = this.context.canvas.width / rect.width;
+    const scaleY = this.context.canvas.height / rect.height;
+    const mouseX = (event.clientX - rect.left) * scaleX;
+    const mouseY = (event.clientY - rect.top) * scaleY;
+
+    this.aimPoint = {
+      first: mouseX,
+      second: mouseY
+    };
+    console.log({mouseX, mouseY});
+    this.calculate();
+  }
+
   private getTargetRadius(): number {
     const canvasWidth = this.canvas.nativeElement.width;
     const canvasHeight = this.canvas.nativeElement.height;
@@ -219,6 +241,7 @@ export class AppComponent implements AfterViewInit {
   private getCanvcasCenter(): Pair<number, number> {
     const canvasWidth = this.canvas.nativeElement.width;
     const canvasHeight = this.canvas.nativeElement.height;
+
     return {
       first: canvasWidth/2,
       second: canvasHeight/2,
