@@ -9,11 +9,13 @@
       <div class="form-group row">
         <div class="col-xs-12 col-lg-4">
           <label for="targetStyle">Target Style</label>
-          <select id="targetStyle" [(ngModel)]="targetStyle">
-            <option *ngFor="let style of targetFace" [value]="style">
-              {{style}}
-            </option>
-          </select>
+          <p>
+            <select id="targetStyle" [(ngModel)]="targetStyle">
+              <option *ngFor="let style of targetFace" [value]="style">
+                {{style}}
+              </option>
+            </select>
+          </p>
           <small class="form-text text-muted">
             Distance from the shooting line to the target face in meters.
           </small>
