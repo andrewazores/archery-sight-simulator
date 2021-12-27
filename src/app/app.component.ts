@@ -28,6 +28,8 @@ export class AppComponent implements AfterViewInit {
   reticleType = '';
   reticleSize = 1;
   reticleColour = 'black';
+  targetMoa = 0;
+  apertureMoa = 0;
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
@@ -45,6 +47,10 @@ export class AppComponent implements AfterViewInit {
     this.drawTarget();
     this.drawAperture();
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    const targetDistance = this.targetDistance * 100;
+
+    this.targetMoa = (21600 / Math.PI) * Math.atan(this.targetDiameter / (2*targetDistance));
+    this.apertureMoa = (21600 / Math.PI) * Math.atan((this.apertureDiameter / 10) / (2*this.eyePinDistance));
   }
 
   drawTarget(): void {
