@@ -1,5 +1,11 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
+export enum TargetFace {
+  WA_TARGET = 'WA Target',
+  WA_FIELD = 'WA Field',
+  IFAA = 'IFAA',
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,9 +13,12 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class AppComponent implements AfterViewInit {
 
+  public targetFace = Object.values(TargetFace).filter(v => typeof v === 'string');
+
   @ViewChild('canvas', { static: false }) canvas: ElementRef;
   context: CanvasRenderingContext2D;
 
+  targetStyle = TargetFace.WA_TARGET;
   targetDistance = 70;
   targetDiameter = 122;
   eyePinDistance = 100;
@@ -39,10 +48,67 @@ export class AppComponent implements AfterViewInit {
   }
 
   drawTarget(): void {
+    switch (this.targetStyle) {
+      case TargetFace.IFAA:
+        this.drawIfaaFace();
+        break;
+      case TargetFace.WA_FIELD:
+        this.drawWaFieldFace();
+        break;
+      case TargetFace.WA_TARGET:
+        // intentional fall-through
+      default:
+        this.drawWaTargetFace();
+        break;
+    }
+  }
+
+  private drawIfaaFace(): void {
+    const blue = '#041e42'; // Pantone 282C
+    this.drawConcentricRing(0, 'white', true);
+    this.drawConcentricRing(0, blue, false);
+
+    this.drawConcentricRing(2, 'white', true);
+    this.drawConcentricRing(2, blue, false);
+
+    this.drawConcentricRing(4, 'white', true);
+    this.drawConcentricRing(4, blue, false);
+
+    this.drawConcentricRing(6, 'white', true);
+    this.drawConcentricRing(6, blue, false);
+
+    this.drawConcentricRing(8, blue, true);
+    this.drawConcentricRing(8, 'white', false);
+    this.drawConcentricRing(9, blue, true);
+    this.drawConcentricRing(9, 'white', false);
+  }
+
+  private drawWaFieldFace(): void {
     const black = '#302e2c';
-    const blue = '#00b4e4';
-    const red = '#f65058'
-    const gold = '#ffe552';
+    const gold = '#ffe552'; // Pantone 107U
+    this.drawConcentricRing(0, 'white', true);
+    this.drawConcentricRing(0, black, false);
+
+    this.drawConcentricRing(2, 'white', true);
+    this.drawConcentricRing(2, black, false);
+
+    this.drawConcentricRing(4, 'white', true);
+    this.drawConcentricRing(4, black, false);
+
+    this.drawConcentricRing(6, 'white', true);
+    this.drawConcentricRing(6, black, false);
+
+    this.drawConcentricRing(8, black, true);
+    this.drawConcentricRing(8, gold, false);
+    this.drawConcentricRing(9, black, true);
+    this.drawConcentricRing(9, gold, false);
+  }
+
+  private drawWaTargetFace(): void {
+    const black = '#302e2c'; // Pantone Process Black
+    const blue = '#00b4e4' // Pantone 306U
+    const red = '#f65058' // Pantone 032U
+    const gold = '#ffe552'; // Pantone 107U
     this.drawConcentricRing(0, black, true);
     this.drawConcentricRing(0, 'white', false);
     this.drawConcentricRing(1, black, true);
@@ -102,7 +168,6 @@ export class AppComponent implements AfterViewInit {
       return;
     }
     const targetDistance = this.targetDistance * 100;
-    const targetAngleDeg = 2 * Math.atan(this.targetDiameter/(2*targetDistance));
 
     const reticleSize = this.reticleSize / 10;
     const reticleAngle = 2 * Math.atan(reticleSize/(2*this.eyePinDistance));
