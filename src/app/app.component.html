@@ -10,7 +10,7 @@
         <div class="col-xs-12 col-lg-4">
           <label for="targetStyle">Target Style</label>
           <p>
-            <select id="targetStyle" [(ngModel)]="targetStyle">
+            <select id="targetStyle" [(ngModel)]="targetStyle" (ngModelChange)="modelChange($event)">
               <option *ngFor="let style of targetFace" [value]="style">
                 {{style}}
               </option>
@@ -22,14 +22,14 @@
         </div>
         <div class="col-xs-12 col-lg-4">
           <label for="targetDistance">Target Distance</label>
-          <input id="targetDistance" class="form-control" type="number" min="1" max="200" [(ngModel)]="targetDistance" (keyup.enter)="calculate()">
+          <input id="targetDistance" class="form-control" type="number" min="1" max="200" [(ngModel)]="targetDistance" (ngModelChange)="modelChange($event)">
           <small class="form-text text-muted">
             Distance from the shooting line to the target face in meters.
           </small>
         </div>
         <div class="col-xs-12 col-lg-4">
           <label for="targetDiameter">Target Diameter</label>
-          <input id="targetDiameter" class="form-control" type="number" min="1" max="122" [(ngModel)]="targetDiameter" (keyup.enter)="calculate()">
+          <input id="targetDiameter" class="form-control" type="number" min="1" max="122" [(ngModel)]="targetDiameter" (ngModelChange)="modelChange($event)">
           <small class="form-text text-muted">
             Target face diameter in centimeters.
           </small>
@@ -37,7 +37,7 @@
       </div>
       <div class="form-group">
         <label for="eyePinDistance">Eye to Pin Distance</label>
-        <input id="eyePinDistance" class="form-control" type="number" min="1" max="200" step="0.1" [(ngModel)]="eyePinDistance" (keyup.enter)="calculate()">
+        <input id="eyePinDistance" class="form-control" type="number" min="1" max="200" step="0.1" [(ngModel)]="eyePinDistance" (ngModelChange)="modelChange($event)">
         <small class="form-text text-muted">
           Distance from archer's (aiming) eye to the sight pin/aperture in centimeters.
           An easy way to get a reasonable approximation for this for a recurve archer is to measure the distance
@@ -46,7 +46,7 @@
       </div>
       <div class="form-group">
         <label for="apertureInnerDiameter">Aperture Inner Diameter</label>
-        <input id="apertureInnerDiameter" class="form-control" type="number" min="1" max="50" step="0.1" [(ngModel)]="apertureDiameter" (keyup.enter)="calculate()">
+        <input id="apertureInnerDiameter" class="form-control" type="number" min="1" max="50" step="0.1" [(ngModel)]="apertureDiameter" (ngModelChange)="modelChange($event)">
         <small class="form-text text-muted">
           Inner diameter of the sight aperture in millimeters.
         </small>
@@ -54,7 +54,7 @@
       <div class="form-group row">
         <div class="col-xs-12 col-lg-6">
           <label for="apertureRingThickness">Aperture Ring Thickness</label>
-          <input id="apertureRingThickness" class="form-control" type="number" min="1" max="5" step="0.1" [(ngModel)]="apertureRingThickness" (keyup.enter)="calculate()">
+          <input id="apertureRingThickness" class="form-control" type="number" min="1" max="5" step="0.1" [(ngModel)]="apertureRingThickness" (ngModelChange)="modelChange($event)">
           <small class="form-text text-muted">
             Thickness of aperture ring in millimeters.
           </small>
@@ -62,7 +62,7 @@
         <div class="col-xs-12 col-lg-6">
           <label for="apertureColour">Aperture Colour</label>
           <p>
-            <select id="apertureColour" [(ngModel)]="apertureColour">
+            <select id="apertureColour" [(ngModel)]="apertureColour" (ngModelChange)="modelChange($event)">
               <option value="chartreuse">Flo. Green</option>
               <option value="crimson">Dark Red</option>
               <option value="red">Bright Red</option>
@@ -82,7 +82,7 @@
         <div class="col-xs-12">
           <label for="reticleType">Reticle Type</label>
           <p>
-            <select [(ngModel)]="reticleType">
+            <select [(ngModel)]="reticleType" (ngModelChange)="modelChange($event)">
               <option value="">None (Open Ring)</option>
               <option value="dot">Dot (Lens Sticker)</option>
             </select>
@@ -91,7 +91,7 @@
         <div class="row" *ngIf="!!reticleType">
           <div class="col-xs-12 col-lg-6" *ngIf="!!reticleType">
             <label for="reticleSize">Reticle Size</label>
-            <input id="reticleSize" class="form-control" type="number" min="0.1" max="5" step="0.1" [(ngModel)]="reticleSize">
+            <input id="reticleSize" class="form-control" type="number" min="0.1" max="5" step="0.1" [(ngModel)]="reticleSize" (ngModelChange)="modelChange($event)">
             <small class="form-text text-muted">
               Diameter of aiming reticle in millimeters.
             </small>
@@ -99,7 +99,7 @@
           <div class="col-xs-12 col-lg-6">
             <label for="reticleColour">Reticle Colour</label>
             <p>
-              <select id="reticleColour" [(ngModel)]="reticleColour">
+              <select id="reticleColour" [(ngModel)]="reticleColour" (ngModelChange)="modelChange($event)">
                 <option value="chartreuse">Flo. Green</option>
                 <option value="crimson">Dark Red</option>
                 <option value="red">Bright Red</option>
@@ -126,9 +126,6 @@
             <input type="submit" value="Reset" (click)="resetAimpoint()">
           </p>
         </div>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Calculate" (click)="calculate()">
       </div>
     </div>
   </div>

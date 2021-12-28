@@ -63,6 +63,11 @@ export class AppComponent implements AfterViewInit {
     this.apertureMoa = (21600 / Math.PI) * Math.atan((this.apertureDiameter / 10) / (2*this.eyePinDistance));
   }
 
+  modelChange(event: any): void {
+    console.log({ event });
+    this.calculate();
+  }
+
   resetAimpoint(): void {
     this.aimPoint = this.getCanvcasCenter();
     this.calculate();
