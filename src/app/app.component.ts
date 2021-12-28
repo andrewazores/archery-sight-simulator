@@ -32,6 +32,8 @@ export class AppComponent implements AfterViewInit {
   apertureMoa = 0;
   aimPoint: Pair<number, number> = { first: 0, second: 0 };
   canvasDimensions: Pair<number, number> = { first: 0, second: 0};
+  canvasScaleX = 1;
+  canvasScaleY = 1;
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
@@ -43,6 +45,8 @@ export class AppComponent implements AfterViewInit {
   onResize(event?: any): void {
     const rect = this.context.canvas.getBoundingClientRect();
     this.canvasDimensions = { first: rect.width, second: rect.height };
+    this.canvasScaleX = this.context.canvas.width / rect.width;
+    this.canvasScaleY = this.context.canvas.height / rect.height;
     this.calculate();
   }
 
@@ -237,7 +241,6 @@ export class AppComponent implements AfterViewInit {
       first: mouseX,
       second: mouseY
     };
-    console.log({mouseX, mouseY});
     this.calculate();
   }
 

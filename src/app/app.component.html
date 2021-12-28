@@ -122,7 +122,7 @@
           <p>Aperture Minute of Angle (MOA): {{this.apertureMoa}}</p>
           <p>Canvas: {{this.canvasDimensions.first | number:'1.0-0'}}x{{this.canvasDimensions.second | number:'1.0-0'}}</p>
           <p>
-            Aimpoint: ({{this.aimPoint.first | number:'1.0-0'}}, {{this.aimPoint.second | number:'1.0-0'}})
+            Aimpoint: ({{this.aimPoint.first / this.canvasScaleX | number:'1.0-0'}}, {{this.aimPoint.second / this.canvasScaleY | number:'1.0-0'}})
             <input type="submit" value="Reset" (click)="resetAimpoint()">
           </p>
         </div>
