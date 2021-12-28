@@ -35,9 +35,14 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.context = (<HTMLCanvasElement>this.canvas.nativeElement).getContext('2d');
+    this.onResize();
+    this.resetAimpoint();
+    this.calculate();
+  }
+
+  onResize(event?: any): void {
     const rect = this.context.canvas.getBoundingClientRect();
     this.canvasDimensions = { first: rect.width, second: rect.height };
-    this.resetAimpoint();
     this.calculate();
   }
 
