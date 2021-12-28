@@ -26,7 +26,8 @@ export class AppComponent implements AfterViewInit {
   apertureRingThickness = 1;
   apertureColour = 'chartreuse';
   reticleType = '';
-  reticleSize = 1;
+  reticleSize = 1.5;
+  pinSize = 0.8;
   reticleColour = 'black';
   targetMoa = 0;
   apertureMoa = 0;
@@ -191,9 +192,77 @@ export class AppComponent implements AfterViewInit {
   }
 
   drawReticle(): void {
-    if (!this.reticleType) {
-      return;
+    switch (this.reticleType) {
+      case 'upPin':
+      case 'downPin':
+      case 'leftPin':
+      case 'rightPin':
+        this.drawPost();
+        // intentional fall-through
+      case 'dot':
+        this.drawDot();
+        break;
+      case 'crosshair':
+        this.drawCrosshair();
+        break;
+      default:
+        break;
     }
+  }
+
+  private drawPost(): void {
+    const targetDistance = this.targetDistance * 100;
+
+    const pinSize = this.pinSize / 10;
+    const pinAngle = 2 * Math.atan(pinSize/(2*this.eyePinDistance));
+    const pinApparent = Math.abs(2*targetDistance*Math.tan(pinAngle/2));
+    const pinCanvasScaled = (pinApparent / this.targetDiameter) * this.getTargetRadius();
+
+    const apertureInnerDiameter = this.apertureDiameter / 10;
+    const apertureInnerAngle = 2 * Math.atan(apertureInnerDiameter/(2*this.eyePinDistance));
+    const apertureInnerApparent = Math.abs(2*targetDistance*Math.tan(apertureInnerAngle/2));
+    const apertureInnerCanvasScaled = (apertureInnerApparent / this.targetDiameter) * this.getTargetRadius();
+
+    this.context.beginPath();
+    switch (this.reticleType) {
+      case 'upPin':
+        this.context.rect(this.aimPoint.first - pinCanvasScaled / 2, this.aimPoint.second, pinCanvasScaled, apertureInnerCanvasScaled);
+        break;
+      case 'downPin':
+        this.context.rect(this.aimPoint.first - pinCanvasScaled / 2, this.aimPoint.second - apertureInnerCanvasScaled, pinCanvasScaled, apertureInnerCanvasScaled);
+        break;
+      case 'leftPin':
+        this.context.rect(this.aimPoint.first - apertureInnerCanvasScaled, this.aimPoint.second - pinCanvasScaled/2, apertureInnerCanvasScaled, pinCanvasScaled);
+        break;
+      case 'rightPin':
+        this.context.rect(this.aimPoint.first, this.aimPoint.second - pinCanvasScaled/2, apertureInnerCanvasScaled, pinCanvasScaled);
+        break;
+    }
+    this.context.fillStyle = this.reticleColour;
+    this.context.fill();
+  }
+
+  private drawCrosshair(): void {
+    const targetDistance = this.targetDistance * 100;
+
+    const pinSize = this.pinSize / 10;
+    const pinAngle = 2 * Math.atan(pinSize/(2*this.eyePinDistance));
+    const pinApparent = Math.abs(2*targetDistance*Math.tan(pinAngle/2));
+    const pinCanvasScaled = (pinApparent / this.targetDiameter) * this.getTargetRadius();
+
+    const apertureInnerDiameter = this.apertureDiameter / 10;
+    const apertureInnerAngle = 2 * Math.atan(apertureInnerDiameter/(2*this.eyePinDistance));
+    const apertureInnerApparent = Math.abs(2*targetDistance*Math.tan(apertureInnerAngle/2));
+    const apertureInnerCanvasScaled = (apertureInnerApparent / this.targetDiameter) * this.getTargetRadius();
+
+    this.context.beginPath();
+    this.context.rect(this.aimPoint.first - apertureInnerCanvasScaled, this.aimPoint.second - pinCanvasScaled / 2, apertureInnerCanvasScaled*2, pinCanvasScaled);
+    this.context.rect(this.aimPoint.first - pinCanvasScaled / 2, this.aimPoint.second - apertureInnerCanvasScaled, pinCanvasScaled, apertureInnerCanvasScaled*2);
+    this.context.fillStyle = this.reticleColour;
+    this.context.fill();
+  }
+
+  private drawDot(): void {
     const targetDistance = this.targetDistance * 100;
 
     const reticleSize = this.reticleSize / 10;
